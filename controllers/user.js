@@ -5,6 +5,7 @@ import bcrypt from 'bcrypt'
 export const createUser = async (req, res) => {
     try {
         const { name, email, password } = req.body;
+        const image = req.file.path
         const isEmailExisted = await Sid.findOne({ email });
 
         //hsah passowrd
@@ -20,6 +21,7 @@ export const createUser = async (req, res) => {
                 name,
                 email,
                 password: hashedpassword,
+                image,
             });
             await user.save();
             res.status(200).json({

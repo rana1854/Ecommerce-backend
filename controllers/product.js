@@ -1,21 +1,14 @@
 import Product from '../models/product.js';
 
-// Create product
+// Create product --Admin route 
 export const createProduct = async (req, res) => {
     try {
-        const { name, description, price, category, image } = req.body;
-        const product = new Product({
-            name,
-            description,
-            price,
-            category,
-            image,
-        });
-        await product.save();
+        const product = new Product(req.body);
+        const saveProducts = await product.save();
         res.status(201).json({
             success: true,
             message: 'Product created successfully',
-            product,
+            saveProducts,
         });
     } catch (error) {
         res.status(500).json({ success: false, message: error.message });
@@ -25,7 +18,7 @@ export const createProduct = async (req, res) => {
 // Get all products
 export const getAllProducts = async (req, res) => {
     try {
-        const products = await Product.find().populate('category', 'name');
+        const products = await Product.find().populate('category').populate('user');//
         res.status(200).json({ success: true, products });
     } catch (error) {
         res.status(500).json({ success: false, message: error.message });
@@ -52,7 +45,7 @@ export const singleProduct = async (req, res) => {
     }
 };
 
-// Delete product by ID
+// Delete product by ID -- Admin route
 export const deleteProduct = async (req, res) => {
     try {
         const productId = req.params.id;
@@ -73,7 +66,7 @@ export const deleteProduct = async (req, res) => {
     }
 };
 
-// Update product by ID
+// Update product by ID -- Admin route
 export const updateProduct = async (req, res) => {
     try {
         const productId = req.params.id;

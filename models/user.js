@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 const userSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: true,
+        required: false,
     },
     email: {
         type: String,
@@ -15,13 +15,12 @@ const userSchema = new mongoose.Schema({
         minlength: [8, "should be atleaset 8 characters"],
 
     },
-    role: {
+ 
+    image: {
         type: String,
-        enum: ["admin", "user"],
-        default: "User",
 
     }
 }, { timestamps: true })
 
-const userModel = mongoose.model("users", userSchema)
+const userModel = mongoose.model("user", userSchema)
 export default userModel;
