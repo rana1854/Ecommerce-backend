@@ -8,6 +8,7 @@ import dotenv from 'dotenv'
 import productRouter from './routers/product.js'
 import categoryRouter from './routers/category.js'
 import path from 'path'
+import orderRouter from './routers/order.js'
 // import cookieParser from 'cookie-parser'
 dotenv.config()
 
@@ -28,6 +29,7 @@ connectionfunction()
 app.use("/api/v1", userRouter)
 app.use("/api/v1", productRouter)
 app.use("/api/v1", categoryRouter)
+app.use("/api/v1", orderRouter)
 
 app.listen(port, () => {
     console.log(`server is running on port ${port}`)
