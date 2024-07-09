@@ -8,7 +8,10 @@ import dotenv from 'dotenv'
 import productRouter from './routers/product.js'
 import categoryRouter from './routers/category.js'
 import path from 'path'
+import cors from 'cors'
 import orderRouter from './routers/order.js'
+
+
 // import cookieParser from 'cookie-parser'
 dotenv.config()
 
@@ -18,6 +21,8 @@ const port = process.env.PORT;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 // app.use(cookieParser())
+
+app.use(cors())
 app.use(express.json());
 app.use("/uploads", express.static(path.join(__dirname, "uploads")))
 app.use(bodyParser.json());
